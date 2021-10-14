@@ -1,4 +1,3 @@
-import {Container} from './styled';
 import { Line, Pie, Bar } from 'react-chartjs-2';
 
 const inscricoesPorDia = [
@@ -220,26 +219,5 @@ function IncporCurso(){
   };
   return <Bar data={data} options={options} />
 }
-export default function Home() {
 
-  return (
-    <Container>
-      <div className="menu">
-        <div> <img src="./assets/img/settings.svg" alt=""/> </div>
-        <div> <img src="./assets/img/grafico.svg" alt=""/> </div>
-      </div>
-      <div className="dashboard">
-        <h1>DashBoard</h1>
-        <div className="menu-dash">
-          <h1>Análises</h1>
-          <div className="infos-inferiores">
-          </div>
-          <div className="infos-maiores" style={{width: '1000px',backgroundColor: '#181621'}}>
-            <IncporCurso/>
-          </div>
-        </div>
-      </div>
-    </Container>
-  );
-}
-
+export { IncporCurso, IncporDia, Conheceu, AgendadosHoje }

@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Home from './home';
-import Box from './components/box-values/index'
+import Routes from './routes'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
-    <Box tittle="testando" grafico="grafico" tittleOne="opaaa"/>
+    <Routes />
   </React.StrictMode>,
   document.getElementById('root')
 );
