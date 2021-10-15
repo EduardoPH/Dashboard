@@ -86,9 +86,30 @@ const Container = styled.div`
     .agp-input {
         display: flex;
         flex-direction: row;
+        button{ 
+            background: #181621;
+            border-radius: 13px;
+            border: solid 1px;
+            border-color: white;
+            color: white;
+            cursor: pointer;
+            outline: none; 
+            &:hover{
+                opacity: 0.3;
 
-        input {
-            margin-right: 1rem;
+            }
+        }
+        .dts{
+            color: white;
+            font-size: 1em;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+            input {
+                margin-right: 1rem;
+                cursor: pointer;
+                outline: none;
+                &:hover{opacity: 0.3;}
+            }
         }
     }
 

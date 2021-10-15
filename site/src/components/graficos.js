@@ -1,34 +1,5 @@
 import { Line, Pie, Bar } from 'react-chartjs-2';
 
-const inscricoesPorDia = [
-  { "data": "2021-10-14", "qtd": 5 },
-  { "data": "2021-10-15", "qtd": 15 },
-  { "data": "2021-10-16", "qtd": 8 },
-  { "data": "2021-10-14", "qtd": 5 },
-  { "data": "2021-10-15", "qtd": 15 },
-  { "data": "2021-10-16", "qtd": 8 }
-]
-
-const inscricoesPorCurso = [
-  { "curso": "Administração", "periodo": "Manhã", "qtd": 5 },
-  { "curso": "Administração", "periodo": "Tarde", "qtd": 5 },
-  { "curso": "Informática", "periodo": "Manhã", "qtd": 21 },
-  { "curso": "Informática", "periodo": "Tarde", "qtd": 32 },
-  { "curso": "ASD", "periodo": "Manhã", "qtd": 5 },
-  { "curso": "ASD", "periodo": "Tarde", "qtd": 5 },
-  { "curso": "InfoGFArmática", "periodo": "Manhã", "qtd": 8 },
-  { "curso": "InfoGFArmática", "periodo": "Tarde", "qtd": 8 },
-  { "curso": "H", "periodo": "Tarde", "qtd": 5 },
-  { "curso": "H", "periodo": "Manhã", "qtd": 5 },
-  { "curso": "S", "periodo": "Tarde", "qtd": 5 },
-  { "curso": "S", "periodo": "Manhã", "qtd": 5 },
-  { "curso": "J", "periodo": "Tarde", "qtd": 8 },
-  { "curso": "J", "periodo": "Manhã", "qtd": 8 },
-  { "curso": "HDF", "periodo": "Tarde", "qtd": 8 },
-  { "curso": "HDF", "periodo": "Manhã", "qtd": 8 },
-  { "curso": "DFG", "periodo": "Manhã", "qtd": 7 },
-  { "curso": "DFG", "periodo": "Tarde", "qtd": 7 }
-]
 
 const Cores = [
   '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
@@ -157,32 +128,16 @@ function Conheceu(props){
 }
 
 function IncporCurso(props){
-  console.log(props.info);
-  let c=  [props.info.map(i => i.curso)][0]
-  const arrayCurso = [...new Set(c)];
-  let a =[props.info.map((i,x) => x % 2 === 0 ? i.qtd : +i)][0]
-  let b =[props.info.map((i,x) => x % 2 !== 0 ? i.qtd : +i)][0]
-  const aNAN = a.filter(function (value) {
-      return !Number.isNaN(value);
-  });
-  const bNAN = b.filter(function (value) {
-      return !Number.isNaN(value);
-  });
-
+ 
+  const labels  = props.info.map(x => `${x.curso} - ${x.periodo}`);
+  const qtdData = props.info.map(x => x.qtd);
   const data = {
-    labels: props.info.map(i => i.curso),
-    datasets: [
-      {
-        label: 'Tarde',
-        data: props.info.map(i => i),
-        backgroundColor: 'rgb(255, 99, 132)',
-      },
-      {
-        label: 'Manhã',
-        data: bNAN,
-        backgroundColor: 'rgb(54, 162, 235)',
-      }
-    ],
+    labels: labels,
+      datasets: [{
+
+        data: qtdData,
+        backgroundColor: Cores.map(i => i)
+      }]
   };
   const options = {
     plugins: {
@@ -192,11 +147,10 @@ function IncporCurso(props){
     },   
     scales: {
       x: {
-        stacked: true,
         ticks: {
           color:"white",
           font:{
-            size: 15,
+            size: 10,
           },
         },
         grid: {
@@ -204,11 +158,10 @@ function IncporCurso(props){
         }
       },
       y: {
-        stacked: true,
         ticks: {
           color:"#EDD3D3",
           font:{
-            size: 15,
+            size: 10,
           },
         },
         grid: {

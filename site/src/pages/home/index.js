@@ -52,7 +52,7 @@ export default function Home() {
         agendadosDoDia(new Date().toISOString().split('T')[0])
         conhece();
     }, [])
-
+    
     return (
         <Container>
             <div className="left-menu">
@@ -73,9 +73,9 @@ export default function Home() {
                         </div>
                         <div className="full-box">
                             <div className="agp-input">
-                                <div> Data Minima: </div> <input type="date" onChange={e => setDateMin(e.target.value)}/>
-                                <div> Data Máxima: </div> <input type="date" onChange={e => setDateMax(e.target.value)}/>
-                                <button onClick={() => agendaramNVieram()}> Consultar </button>
+                                <div className="dts"> Data Minima: <input type="date" onChange={e => setDateMin(e.target.value)}/> </div> 
+                                <div className="dts"> Data Máxima: <input type="date" onChange={e => setDateMax(e.target.value)}/></div> 
+                                <button onClick={() => agendaramNVieram()}> <img style={{width: '2em', cursor: 'pointer'}} src="/assets/img/pesquisar.svg" alt=""/> </button>
                             </div>
                             {agendaram == {} ? <div> </div> : <BoxTwoLines2 tittle="Não Compareceram" grafico={ <AgendaramNaoVieram info={agendaram}/> } msg={agendaram} />}
                         </div>
