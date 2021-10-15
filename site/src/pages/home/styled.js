@@ -63,7 +63,7 @@ const Container = styled.div`
         border-radius: 30px;
         padding: 1rem 2rem 2rem 2rem;
         margin: 2rem;
-        height: 80%;
+        height: 87%;
     }
 
     .agp-box-top {
@@ -73,12 +73,42 @@ const Container = styled.div`
         margin-bottom: 5rem;
     }
 
+    .full-box{
+        width: 30%;
+
+        :first-child {
+            input {
+                height: 32px;
+            }
+        }
+    }
+
+    .agp-input {
+        display: flex;
+        flex-direction: row;
+
+        input {
+            margin-right: 1rem;
+        }
+    }
+
+    .agp-input div {
+        font-size: .8em;
+    }
+
+    .full-box:last-child {
+        .agp-input {
+            height: 32px;
+        }
+    }
+
     .agp-box-low {
         display: flex;
         flex-direction: row;
         width: 100%;
         justify-content: space-between;
     }
+
 `   
 
 export { Container }

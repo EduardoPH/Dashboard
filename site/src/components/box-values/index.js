@@ -1,8 +1,10 @@
-import { Container, LargeContainer } from "./styled";
+import { Container, LargeContainer, Fullbox } from "./styled";
 import React from "react";
 import Mensagem from './text-value/index'
 
 function BoxTwoLines(props) {
+  const msg = props.msg;
+
   return (
     <Container>
       <div className="tittle"> {props.tittle} </div>
@@ -10,8 +12,28 @@ function BoxTwoLines(props) {
       <div className="pt2-components">
         <div className="grafico"> {props.grafico} </div>
         <div> 
-            <Mensagem tittle={props.tittleOne} value={props.valueOne}/> 
-            <Mensagem tittle={props.tittleTwo} value={props.valueTwo}/> 
+          {msg.map(i => {
+            return(
+              <Mensagem tittle={i.tipo} value={i.qtd}/>
+            )
+          })}
+        </div>
+      </div>
+    </Container>
+  );
+}
+
+function BoxTwoLines2(props) {
+  const msg = props.msg;
+  return (
+    <Container>
+      <div className="tittle"> {props.tittle} </div>
+      <div className="barra"/>
+      <div className="pt2-components">
+        <div className="grafico"> {props.grafico} </div>
+        <div>
+          <Mensagem tittle="Expectativa:" value={msg.expectativa}/>
+          <Mensagem tittle="Realidade" value={msg.realidade}/>
         </div>
       </div>
     </Container>
@@ -42,4 +64,18 @@ function LargeBox(props) {
   )
 }
 
-export { BoxTwoLines, BoxNoGraphic, LargeBox }
+function BoxFull(props) {
+  return (
+    <Fullbox>
+      <div className="tittle"> {props.tittle} </div>
+      <div className="barra"/>
+      <div className="pt2-components">
+        <div className="infos"> 
+          <div className="noGraphic-Info"> {props.info} </div>
+        </div>
+      </div>
+    </Fullbox>
+  )
+}
+
+export { BoxTwoLines, BoxNoGraphic, LargeBox, BoxFull, BoxTwoLines2 }
