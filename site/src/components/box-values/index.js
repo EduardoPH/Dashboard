@@ -40,20 +40,6 @@ function BoxTwoLines2(props) {
   );
 }
 
-function BoxNoGraphic(props) {
-  return (
-    <Container>
-      <div className="tittle"> {props.tittle} </div>
-      <div className="barra"/>
-      <div className="pt2-components">
-        <div className="infos"> 
-          <div className="noGraphic-Info"> {props.info} </div>
-        </div>
-      </div>
-    </Container>
-  )
-}
-
 function LargeBox(props) {
   return (
     <LargeContainer>
@@ -78,4 +64,4 @@ function BoxFull(props) {
   )
 }
 
-export { BoxTwoLines, BoxNoGraphic, LargeBox, BoxFull, BoxTwoLines2 }
+export { BoxTwoLines, LargeBox, BoxFull, BoxTwoLines2 }

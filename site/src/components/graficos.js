@@ -14,6 +14,10 @@ const Cores = [
   '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'
 ];
 
+const CoresGraphicBar = [
+  '#9d4edd', '#7b2cbf', '#3c096c', '#240046', '#ff9e00', '#ff9100', '#ff7900', '#ff6d00','#c9184a', '#a4133c', '#8a5a44', '#774936', '#48bfe3', '#56cfe1', '#01497c', '#01497c'
+];
+
 function IncporDia(props) {
   const data = {
     labels: props.info.map(i => i.data),
@@ -136,7 +140,7 @@ function IncporCurso(props){
       datasets: [{
 
         data: qtdData,
-        backgroundColor: Cores.map(i => i)
+        backgroundColor: CoresGraphicBar.map(i => i)
       }]
   };
   const options = {

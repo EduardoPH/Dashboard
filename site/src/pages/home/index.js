@@ -1,8 +1,11 @@
 import { Container } from './styled'
 import { IncporCurso, IncporDia, Conheceu, AgendaramNaoVieram } from '../../components/graficos'
-import { BoxTwoLines, BoxTwoLines2, BoxNoGraphic, LargeBox, BoxFull } from '../../components/box-values/index'
+import { BoxTwoLines, BoxTwoLines2, LargeBox, BoxFull } from '../../components/box-values/index'
 import { useEffect, useState } from 'react'
+import Modal from '../../components/modal'
 import Api from '../../service/api'
+
+
 
 const api = new Api()
 
@@ -18,6 +21,8 @@ export default function Home() {
     const [cursos, setCursos] = useState([]);
 
     const [cursosPorDia, setCursosPorDia] = useState([])
+
+    const [inputValue, setInputValue] = useState();
 
     const agendadosDoDia = async(data) => {
         let r = await api.agendadosDoDia(data);
@@ -42,7 +47,6 @@ export default function Home() {
     const porDia = async() => {
         let r = await api.InscPorDia();
         setCursosPorDia(r);
-
     }
 
     useEffect(() => {
