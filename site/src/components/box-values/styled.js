@@ -65,7 +65,7 @@ const Container = styled.div`
 `
 
 const LargeContainer = styled.div`
-    width: 48%;
+    width: 90%;
     height: auto;
 
     background: #181621;
@@ -87,6 +87,24 @@ const LargeContainer = styled.div`
         width: 88%;
         height: 1.5px;
         background-color: #EDD3D3
+    }
+
+    .pt1 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .fullscreen{
+        display: flex;
+        height: 30px;
+        transition: all 0.3s;
+        transform: scale(0.8);
+
+        &:hover{
+            transform: scale(1);
+        }
     }
 
     .tittle {
@@ -172,6 +190,10 @@ const Fullbox = styled.div`
 
         margin-top: 2rem;
     }
+`
+
+const Logo = styled.img`
+
 `
 
 export {Container, LargeContainer, Fullbox}

@@ -2,8 +2,9 @@ import { Container } from './styled'
 import { IncporCurso, IncporDia, Conheceu, AgendaramNaoVieram } from '../../components/graficos'
 import { BoxTwoLines, BoxTwoLines2, LargeBox, BoxFull } from '../../components/box-values/index'
 import { useEffect, useState } from 'react'
-import Modal from '../../components/modal'
 import Api from '../../service/api'
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
 
 
 
@@ -23,6 +24,12 @@ export default function Home() {
     const [cursosPorDia, setCursosPorDia] = useState([])
 
     const [inputValue, setInputValue] = useState();
+
+    const [open, setOpen] = useState(false);
+
+    const onOpenModal = () => setOpen(true);
+    const onCloseModal = () => setOpen(false);
+  
 
     const agendadosDoDia = async(data) => {
         let r = await api.agendadosDoDia(data);
@@ -81,7 +88,7 @@ export default function Home() {
                                 <div className="dts"> Data Máxima: <input type="date" onChange={e => setDateMax(e.target.value)}/></div> 
                                 <button onClick={() => agendaramNVieram()}> <img style={{width: '2em', cursor: 'pointer'}} src="/assets/img/pesquisar.svg" alt=""/> </button>
                             </div>
-                            {agendaram == {} ? <div> </div> : <BoxTwoLines2 tittle="Não Compareceram" grafico={ <AgendaramNaoVieram info={agendaram}/> } msg={agendaram} />}
+                            {agendaram === {} ? <div> </div> : <BoxTwoLines2 tittle="Não Compareceram" grafico={ <AgendaramNaoVieram info={agendaram}/> } msg={agendaram} />}
                         </div>
                         
                         <div className="full-box" >
@@ -90,8 +97,15 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="agp-box-low">
-                        <LargeBox tittle="Inscrições por Curso" grafico={<IncporCurso info={cursos} />} />
-                        <LargeBox tittle="Inscrições por Dia" grafico={<IncporDia info={cursosPorDia} /> }/>
+                        <div className="insc"> 
+                            <LargeBox tittle="Inscrições por Curso" grafico={<IncporCurso info={cursos}/>} />
+                        </div>
+                        <div className="insc" onClick={onOpenModal}>
+                            <Modal center={true}open={open} onClose={onCloseModal} classNames={{overlay: 'customOverlay',modal: 'customModal'}}>  
+                                <LargeBox tittle="Inscrições por Dia" grafico={<IncporDia info={cursosPorDia}/> }/>
+                            </Modal>
+                            <LargeBox tittle="Inscrições por Dia" grafico={<IncporDia info={cursosPorDia}/> }/>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -19,6 +19,22 @@ const Container = styled.div`
         padding: 0px 1rem;
     }
 
+    .customOverlay {
+        background: rgba(36, 123, 160, 0.7);
+    }
+
+    .customModal {
+        display: flex;
+        background: #b2dbbf;
+        width: 500px;
+    }
+
+    .insc {
+        width: 43%;
+        display: flex;
+        flex-direction: row;
+    }
+
     .left-menu img {
         fill: white;
         width: 80%;
