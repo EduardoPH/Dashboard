@@ -42,7 +42,7 @@ export default function Home() {
         setGraficoConheceu(r);
     }
 
-    const agendaramNVieram = async() => {
+    const agendaramNVieram = async(dateMin, dateMax) => {
         let r = await api.agendaramENaoVieram(dateMin, dateMax);
         setAgendaram(r);
     }
@@ -85,8 +85,8 @@ export default function Home() {
         porCurso();
         agendadosDoDia(new Date().toISOString().split('T')[0]);
         conhece();
-        agendaramNVieram();
-    }, [])
+        agendaramNVieram(dateMin, dateMax);
+    }, [dateMin, dateMax])
     
     return (
         <Container>
@@ -132,7 +132,6 @@ export default function Home() {
                             <div className="agp-input">
                                 <div className="dts"> Data Minima: <input type="date" onChange={e => setDateMin(e.target.value)}/> </div> 
                                 <div className="dts"> Data Máxima: <input type="date" onChange={e => setDateMax(e.target.value)}/></div> 
-                                <button onClick={() => agendaramNVieram()}> <img style={{width: '2em', cursor: 'pointer'}} src="/assets/img/pesquisar.svg" alt=""/> </button>
                             </div>
                             {agendaram === {} ? <div> </div> : <BoxTwoLines2 tittle="Não Compareceram" grafico={ <AgendaramNaoVieram info={agendaram}/> } msg={agendaram} />}
                         </div>
