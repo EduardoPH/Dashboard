@@ -65,7 +65,7 @@ const Container = styled.div`
 `
 
 const LargeContainer = styled.div`
-    width: 90%;
+    width: 100%;
     height: auto;
 
     background: #181621;
@@ -192,8 +192,5 @@ const Fullbox = styled.div`
     }
 `
 
-const Logo = styled.img`
-
-`
 
 export {Container, LargeContainer, Fullbox}

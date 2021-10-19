@@ -1,16 +1,19 @@
 import { Container } from './styled'
 import { IncporCurso, IncporDia, Conheceu, AgendaramNaoVieram } from '../../components/graficos'
 import { BoxTwoLines, BoxTwoLines2, LargeBox, BoxFull } from '../../components/box-values/index'
-import { useEffect, useState } from 'react'
-import Api from '../../service/api'
+import { useEffect, useState } from 'react';
+import Api from '../../service/api';
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+    
 
 
 const api = new Api()
 
 export default function Home() {
+    const[total, setTotal] = useState(0)
 
     const [dataAgendadosHoje, setDataAgendadosHoje] = useState(0);
     const [graficoConheceu, setGraficoConheceu] = useState([]);
@@ -21,9 +24,7 @@ export default function Home() {
 
     const [cursos, setCursos] = useState([]);
 
-    const [cursosPorDia, setCursosPorDia] = useState([])
-
-    const [inputValue, setInputValue] = useState();
+    const [cursosPorDia, setCursosPorDia] = useState([]);
 
     const [open, setOpen] = useState(false);
 
@@ -49,38 +50,83 @@ export default function Home() {
     const porCurso = async() => {
         let r = await api.inscPorCurso();
         setCursos(r);
+        setTotal(r.reduce((prev, curr) => prev + curr.qtd, 0));
     }
 
     const porDia = async() => {
         let r = await api.InscPorDia();
         setCursosPorDia(r);
     }
+    const responsive = {
+    superLargeDesktop: {
+         breakpoint: { max: 4000, min: 3000 },
+        items: 1
+    },
+    desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 1
+    },
+    tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 1
+    },
+    mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1
+    }
+    };
+    const closeIcon = (
+        <img src="/assets/img/icon-close.png" style={{width: '3em', outline: 'none'}} alt=""/>
+      );
 
+    
     useEffect(() => {
         porDia();
         porCurso();
-        agendaramNVieram();
-        agendadosDoDia(new Date().toISOString().split('T')[0])
+        agendadosDoDia(new Date().toISOString().split('T')[0]);
         conhece();
+        agendaramNVieram();
     }, [])
     
     return (
         <Container>
-            <div className="left-menu">
-                <img src="/assets/img/grafico.svg" alt="dashboard" />
-                <img src="/assets/img/settings.svg" alt="settings" />
-            </div>
+            <Modal 
+                closeOnOverlayClick={true} 
+                center={true} 
+                open={open} 
+                onClose={onCloseModal} 
+                classNames={{
+                    overlay: 'customOverlay',
+                    modal: 'customModal',
+                }}
+                closeIcon={closeIcon}
+            >
+                <div className="modalConfig">
+                    <Carousel
+                        infinite={true} 
+                        responsive={responsive}
+                    >
+                        <BoxTwoLines2 tittle="Não Compareceram" grafico={ <AgendaramNaoVieram info={agendaram}/> } msg={agendaram} /> 
+                        <BoxTwoLines tittle="Como Conheceu" grafico={<Conheceu info={graficoConheceu}/> } msg={graficoConheceu} />
+                        <LargeBox tittle={`Inscrições por Curso, total ( ${total} )`}  grafico={<IncporCurso info={cursos}/>} />         
+                        <LargeBox tittle="Inscrições por Dia" grafico={<IncporDia info={cursosPorDia}/> }/>
+                    </Carousel>
+                </div>
+            </Modal>
             <div className="right-container">
                 <div className="tittle-refresh">
                     <h1> Dashboard </h1>
-                    <button> <img src="/assets/img/refreshIcon.png" alt="refresh" /> </button>
+                    <button>  
+                        <img src="https://www.freeiconspng.com/uploads/white-full-screen-icon-5.png"  onClick={onOpenModal} alt="settings" /> 
+                    </button>
                 </div>
                 <div className="principal-box">
-                    <h2> Análises </h2>
+                    <h2> Análise </h2>
                     <div className="agp-box-top">
                         <div className="full-box">
                             <input type="date" onChange={e => agendadosDoDia(e.target.value)}/>
-                            <BoxFull tittle="Agendados do Dia" info={dataAgendadosHoje} />
+                            <BoxFull tittle="Agendados do Dia"  total={total} info={dataAgendadosHoje} />
+                            
                         </div>
                         <div className="full-box">
                             <div className="agp-input">
@@ -98,12 +144,9 @@ export default function Home() {
                     </div>
                     <div className="agp-box-low">
                         <div className="insc"> 
-                            <LargeBox tittle="Inscrições por Curso" grafico={<IncporCurso info={cursos}/>} />
+                            <LargeBox tittle={`Inscrições por Curso, total ( ${total} )`} grafico={<IncporCurso info={cursos}/>} />
                         </div>
-                        <div className="insc" onClick={onOpenModal}>
-                            <Modal center={true}open={open} onClose={onCloseModal} classNames={{overlay: 'customOverlay',modal: 'customModal'}}>  
-                                <LargeBox tittle="Inscrições por Dia" grafico={<IncporDia info={cursosPorDia}/> }/>
-                            </Modal>
+                        <div className="insc" >
                             <LargeBox tittle="Inscrições por Dia" grafico={<IncporDia info={cursosPorDia}/> }/>
                         </div>
                     </div>

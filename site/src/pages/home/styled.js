@@ -9,7 +9,8 @@ const Container = styled.div`
 
     display: flex;
     flex-direction: row;
-
+     padding: 1em 2em 0em 2em;
+   
     .left-menu {
         display: flex;
         flex-direction: column;
@@ -18,17 +19,6 @@ const Container = styled.div`
         background: rgba(15, 14, 21, 0.5);
         padding: 0px 1rem;
     }
-
-    .customOverlay {
-        background: rgba(36, 123, 160, 0.7);
-    }
-
-    .customModal {
-        display: flex;
-        background: #b2dbbf;
-        width: 500px;
-    }
-
     .insc {
         width: 43%;
         display: flex;
@@ -66,20 +56,20 @@ const Container = styled.div`
         height: 50%;
         outline: none;
         border: 1px solid transparent;
-        padding: 10px
+        padding: 10px;
+        display:flex;
     }
 
     .tittle-refresh button > img {
-        width: 80%;
-        height: auto;
+        width: 2em;
+        height: 2em;
     }
 
     .principal-box {
         background: rgba(15, 14, 21, 0.5);
         border-radius: 30px;
         padding: 1rem 2rem 2rem 2rem;
-        margin: 2rem;
-        height: 87%;
+        height: 91%;
     }
 
     .agp-box-top {

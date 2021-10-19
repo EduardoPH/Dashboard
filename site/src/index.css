@@ -8,4 +8,20 @@ body {
   font-family: 'Roboto Slab', serif;
 }
 
+.customOverlay {
+  background: rgba(36, 123, 160, 0.7);
+}
+.customModal {
+   width: 100%;
+   max-width: 800px;
+   display: inline-block;
+   vertical-align: middle;
+   box-shadow: 0 12px 15px 0 rgb(0 0 0 / 25%);
+   margin: 0rem; 
+   padding: 0rem!important;
+   overflow-y: auto;
+   
+     
+   
+}
 

@@ -1,4 +1,4 @@
-import { Container, LargeContainer, Fullbox, Logo } from "./styled";
+import { Container, LargeContainer, Fullbox } from "./styled";
 import React from "react";
 import Mensagem from './text-value/index'
 
@@ -61,7 +61,7 @@ function BoxFull(props) {
       <div className="pt2-components">
         <div className="infos"> 
           <div className="noGraphic-Info"> {props.info} </div>
-        </div>[]
+        </div>
       </div>
     </Fullbox>
   )
